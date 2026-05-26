@@ -425,6 +425,7 @@ function makeFavorite(index) {
   displayContactCard(ContactList);
   dispalyFavouriteCard(ContactList);
   dispalyEmergencyCard(ContactList);
+  showStatistics();
 }
 function makeEmergency(index) {
   if (ContactList[index].isEmergency == true) {
@@ -436,6 +437,7 @@ function makeEmergency(index) {
   displayContactCard(ContactList);
   dispalyFavouriteCard(ContactList);
   dispalyEmergencyCard(ContactList);
+  showStatistics();
 }
 function validateInput(element) {
   var regex = {
