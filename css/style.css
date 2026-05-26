@@ -1,0 +1,190 @@
+:root {
+  --main-color: #5338f7;
+  --section-padding: 60px;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+body {
+  background-color: #f7f9fc;
+}
+section {
+  padding: var(--section-padding);
+}
+.bg-navbar {
+  background-color: var(--main-color);
+}
+.text-move {
+  color: var(--main-color);
+}
+.btn-primary {
+  background-color: var(--main-color);
+  border-color: var(--main-color);
+  transition: 100ms;
+}
+.btn-primary:hover {
+  background-color: var(--main-color);
+  transform: translateY(-5px);
+}
+.btn-primary:focus {
+  background-color: var(--main-color);
+}
+.nav-icon {
+  transition: 100ms;
+}
+.nav-icon:hover {
+  background-color: #f3f4f6;
+  cursor: pointer;
+}
+.navbar {
+  background-color: white !important;
+}
+.statistcs-card {
+  box-shadow:
+    0 1px 1px 0 rgba(0, 0, 0, 0.2),
+    0 1px 2px 0 rgba(0, 0, 0, 0.19);
+  transition: 500ms;
+}
+.statistcs-card:hover {
+  box-shadow:
+    0 2px 4px 0 rgba(0, 0, 0, 0.2),
+    0 3px 10px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
+}
+.bg-orange {
+  background-color: #ff8700;
+}
+.form-control:focus {
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  border-color: var(--main-color);
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem #5e46f877;
+}
+.card-star {
+  left: 60px;
+}
+.phone-call {
+  padding: 5px;
+  background: #dbeafe;
+}
+.bg-move {
+  background-color: #ede9fe;
+}
+.bg-green {
+  background-color: #d0fae5;
+}
+.bg-danger {
+  background-color: #ef002c !important;
+}
+.bg-danger-subtle {
+  background-color: #fff1f2;
+}
+.bg-work {
+  background-color: #f3e8ff;
+  color: #6e4eff;
+}
+.bg-friend {
+  background-color: #d0fae5;
+  color: #009966;
+}
+.bg-family {
+  background-color: #dbeafe;
+  color: #1447e8;
+}
+.bg-school {
+  background-color: #fef3c6;
+  color: #bb4d00;
+}
+.bg-other {
+  background-color: #f3f4f6;
+  color: #5b4153;
+}
+.card-footer-star {
+  color: rgb(106, 114, 130);
+  transition: 100ms;
+}
+.card-footer-heart {
+  color: rgb(106, 114, 130);
+  transition: 100ms;
+}
+.card-footer-pen {
+  color: rgb(106, 114, 130);
+  transition: 100ms;
+}
+.card-footer-trash {
+  color: rgb(106, 114, 130);
+  transition: 100ms;
+}
+.card-footer-star:hover {
+  background-color: #fffbeb;
+  color: gold;
+  cursor: pointer;
+}
+.card-footer-heart:hover {
+  background-color: #ffe4e6;
+  color: #ff2056;
+  cursor: pointer;
+}
+.card-footer-pen:hover {
+  background-color: #eef2ff;
+  color: #4f39f6;
+  cursor: pointer;
+}
+.card-footer-trash:hover {
+  background-color: #fff1f2;
+  color: #ec003f;
+  cursor: pointer;
+}
+.bg-orange-subtle {
+  background-color: #fff8ed;
+}
+.fs-6 {
+  font-size: 12px !important;
+}
+.bg-second {
+  background-color: #f9fafb;
+}
+.favourit-card {
+  transition: 100ms;
+}
+.favourit-card:hover {
+  background-color: #fffbeb;
+  cursor: pointer;
+}
+.span-phone a {
+  transition: 100ms;
+}
+.span-phone a:hover {
+  background-color: green !important;
+}
+.span-phone a:hover i {
+  color: white !important;
+}
+
+.danger-card:hover {
+  background-color: #fff1f2;
+  cursor: pointer;
+}
+.span-phone-danger a {
+  transition: 100ms;
+}
+.span-phone-danger a:hover {
+  background-color: #ff2056 !important;
+}
+.span-phone-danger a:hover i {
+  color: white !important;
+}
+.bg-heart {
+  background-color: #ffe4e6;
+}
+.top-20 {
+  top: 90px;
+}
+.btn-outline-secondary:hover i {
+  color: white !important;
+}
+.vh-20 {
+  height: 200px;
+}

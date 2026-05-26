@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/all.min.css" />
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+
+  <body>
+    <nav class="p-3 fixed-top bg-white">
+      <div class="container">
+        <div class="row justify-content-between align-items-center">
+          <div class="col-3">
+            <div class="d-flex align-items-center">
+              <span class="p-2 bg-navbar rounded-4 me-2">
+                <i
+                  class="fa-solid fa-address-book fa-lg"
+                  style="color: rgb(255, 255, 255)"
+                ></i>
+              </span>
+              <a class="navbar-brand" href="#">
+                <h3 class="mb-0">Contact <span class="text-move">Hub</span></h3>
+                <p class="mb-0 text-secondary fs-6">Smart Contact Manager</p>
+              </a>
+            </div>
+          </div>
+          <div class="col-3">
+            <btn
+              onclick=""
+              data-bs-toggle="modal"
+              data-bs-target="#contactModal"
+              class="btn rounded-3 btn-primary me-2"
+              >+ Add Contact</btn
+            >
+            <span class="p-1 nav-icon rounded-2 me-2 d-none d-lg-inline"
+              ><i class="fa-solid fa-bell" style="color: #a8aaad"></i
+            ></span>
+            <span class="p-1 nav-icon rounded-2 me-2 d-none d-lg-inline"
+              ><i class="fa-solid fa-gear" style="color: #a8aaad"></i
+            ></span>
+            <img
+              src="./images/imgi_1_avatar-4.png"
+              class="rounded-3 mt-sm-1 d-lg-inline d-none mt-md-0"
+              width="40px"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="modal fade" id="contactModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-4">
+          <div class="modal-header">
+            <h3 class="modal-title fw-bold">Add New Contact</h3>
+
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+
+          <div class="modal-body">
+            <label for="contactImage">Choose Your Photo</label>
+            <input class="form-control" id="contactImage" type="file" />
+            <div class="mt-2">
+              <label for="fullName"
+                >Full Name <span class="text-danger">*</span></label
+              >
+              <input
+                type="text"
+                id="fullName"
+                class="form-control"
+                placeholder="Enter Full Name"
+              />
+
+              <label class="mt-2" for="phoneNumber"
+                >Phone Number<span class="text-danger"> *</span></label
+              >
+              <input
+                type="number"
+                id="phoneNumber"
+                class="form-control"
+                placeholder="e.g., 01155213444"
+              />
+
+              <label class="mt-2" for="Email"
+                >Email<span class="text-danger"> *</span></label
+              >
+              <input
+                type="email"
+                id="email"
+                class="form-control"
+                placeholder="Name@Example.com"
+              />
+
+              <label class="mt-2" for="Address"
+                >Address<span class="text-danger"> *</span></label
+              >
+              <input
+                type="text"
+                id="Address"
+                class="form-control"
+                placeholder="Enter Address"
+              />
+
+              <label class="mt-2" for="Group"
+                >Group<span class="text-danger"> *</span></label
+              >
+              <select name="selectGroup" id="Group" class="form-control">
+                <option value="Family">Family</option>
+                <option value="Friend">Friend</option>
+                <option value="Work">Work</option>
+                <option value="School">School</option>
+                <option selected value="Others">Others</option>
+              </select>
+
+              <label class="mt-2" for="Notes"
+                >Notes<span class="text-danger"> *</span></label
+              >
+              <textarea
+                name="Notes"
+                id="Notes"
+                class="form-control mb-2"
+                rows="3"
+              ></textarea>
+              <input id="isFavorite" type="checkbox" />
+              <label for="isFavorite"
+                ><i class="fa-solid me-1 fa-star" style="color: gold"></i
+                >Favorite</label
+              >
+              <input id="isEmergency" type="checkbox" />
+              <label for="isEmergency"
+                ><i
+                  class="fa-solid fa-heart-pulse me-1"
+                  style="color: #f60e40"
+                ></i
+                >Emergency</label
+              >
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-secondary" data-bs-dismiss="modal">
+              Cancel
+            </button>
+            <button
+              id="upBtn"
+              onclick="updateContact()"
+              class="btn btn-warning d-none"
+            >
+              Update Contact
+            </button>
+            <button
+              id="addBtn"
+              onclick="createContact()"
+              class="btn btn-primary"
+            >
+              Save Contact
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="mt-5">
+      <div class="container mt-3">
+        <div class="row g-2">
+          <div class="col-md-4">
+            <div
+              class="bg-white rounded-3 d-flex align-items-center p-3 statistcs-card"
+            >
+              <span class="p-3 rounded-4 bg-primary me-3">
+                <i class="fa-solid fa-users fa-lg text-white"></i>
+              </span>
+
+              <div>
+                <p class="mb-0 text-secondary">Total</p>
+                <h3 id="totalNumber" class="mb-0">0</h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div
+              class="bg-white rounded-3 d-flex align-items-center p-3 statistcs-card"
+            >
+              <span class="p-3 rounded-4 bg-orange me-3">
+                <i
+                  class="fa-solid fa-lg fa-star"
+                  style="color: rgb(255, 255, 255)"
+                ></i>
+              </span>
+
+              <div>
+                <p class="mb-0 text-secondary">Favorites</p>
+                <h3 id="favoritesNumber" class="mb-0">0</h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div
+              class="bg-white rounded-3 d-flex align-items-center p-3 statistcs-card"
+            >
+              <span class="p-3 rounded-4 bg-danger me-3">
+                <i
+                  class="fa-solid fa-lg fa-heart-pulse"
+                  style="color: rgb(255, 255, 255)"
+                ></i>
+              </span>
+
+              <div>
+                <p class="mb-0 text-secondary">Emergency</p>
+                <h3 id="emergencyNumber" class="mb-0">0</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9">
+            <h3 class="h2 fw-bold">All Contacts</h3>
+            <p class="text-secondary">Manage and organize your 3 contacts</p>
+            <div class="position-relative w-100 mb-4">
+              <input
+                onkeyup="search()"
+                type="search"
+                id="searchInput"
+                class="form-control ps-5"
+                placeholder="Search by Name, Phone and Email"
+              />
+
+              <i
+                class="fa-solid fa-magnifying-glass position-absolute top-50 start-0 translate-middle-y ms-3"
+                style="color: rgb(173, 173, 173)"
+              ></i>
+            </div>
+            <div id="contactData" class="row"></div>
+          </div>
+          <div class="col-12 mt-sm-4 col-md-3">
+            <div class="position-sticky top-20">
+              <div class="rounded-3 shadow bg-white">
+                <div
+                  class="p-3 d-flex align-items-start bg-orange-subtle rounded-top-3"
+                >
+                  <span class="p-2 rounded-2 bg-orange me-3">
+                    <i
+                      class="fa-solid fa-star"
+                      style="color: rgb(255, 255, 255)"
+                    ></i>
+                  </span>
+                  <div>
+                    <h4 class="fw-bold mb-0">Favorites</h4>
+                    <p class="text-secondary mb-0 fs-6">
+                      Quick access to starred contacts
+                    </p>
+                  </div>
+                </div>
+                <div
+                  id="favoriteCard"
+                  class="card-body vh-20 overflow-auto p-2"
+                ></div>
+              </div>
+              <div class="rounded-3 mt-3 shadow bg-white">
+                <div
+                  class="p-3 d-flex align-items-start bg-danger-subtle rounded-top-3"
+                >
+                  <span class="p-2 rounded-3 bg-danger me-3">
+                    <i
+                      class="fa-solid fa-lg fa-heart-pulse"
+                      style="color: rgb(255, 255, 255)"
+                    ></i>
+                  </span>
+                  <div>
+                    <h4 class="fw-bold mb-0">Emergency</h4>
+                    <p class="text-secondary mb-0 fs-6">
+                      Important contacts for urgent calls
+                    </p>
+                  </div>
+                </div>
+                <div
+                  id="emergencyCard"
+                  class="card-body vh-20 overflow-auto p-2"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./JS/bootstrap.bundle.min.js"></script>
+    <script src="./JS/main.js"></script>
+  </body>
+</html>
