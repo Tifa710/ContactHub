@@ -24,34 +24,43 @@ if (localStorage.getItem("Contacts") != null) {
   showStatistics();
 }
 function createContact() {
-  var modal = bootstrap.Modal.getInstance(
-    document.getElementById("contactModal"),
-  );
-  var Contact = {
-    fullName: fullNameInput.value,
-    phoneNumber: phoneNumberInput.value,
-    Email: emailInput.value,
-    Address: AddressInput.value,
-    Group: GroupInput.value,
-    Notes: NotesInput.value,
-    isFavorite: isFavoriteInput.checked,
-    isEmergency: isEmergencyInput.checked,
-    image: "images/" + imageInput.files[0]?.name,
-  };
-  ContactList.push(Contact);
-  localStorage.setItem("Contacts", JSON.stringify(ContactList));
-  clearForm();
-  modal.hide();
-  Swal.fire({
-    title: "Done",
-    text: "Contact Added",
-    icon: "success",
-    confirmButtonText: "Close",
-  });
-  showStatistics();
-  displayContactCard(ContactList);
-  dispalyFavouriteCard(ContactList);
-  dispalyEmergencyCard(ContactList);
+  if (
+    validateInput(fullNameInput) &&
+    validateInput(phoneNumberInput) &&
+    validateInput(emailInput) &&
+    validateInput(AddressInput) &&
+    validateInput(NotesInput) &&
+    validateInput(imageInput)
+  ) {
+    var modal = bootstrap.Modal.getInstance(
+      document.getElementById("contactModal"),
+    );
+    var Contact = {
+      fullName: fullNameInput.value,
+      phoneNumber: phoneNumberInput.value,
+      Email: emailInput.value,
+      Address: AddressInput.value,
+      Group: GroupInput.value,
+      Notes: NotesInput.value,
+      isFavorite: isFavoriteInput.checked,
+      isEmergency: isEmergencyInput.checked,
+      image: "images/" + imageInput.files[0]?.name,
+    };
+    ContactList.push(Contact);
+    localStorage.setItem("Contacts", JSON.stringify(ContactList));
+    clearForm();
+    modal.hide();
+    Swal.fire({
+      title: "Done",
+      text: "Contact Added",
+      icon: "success",
+      confirmButtonText: "Close",
+    });
+    showStatistics();
+    displayContactCard(ContactList);
+    dispalyFavouriteCard(ContactList);
+    dispalyEmergencyCard(ContactList);
+  }
 }
 function showStatistics() {
   var emergencyCount = 0;
@@ -215,10 +224,10 @@ function displayContactCard(arr) {
                         ></a>
                       </div>
                       <div>
-                        <span onclick="" class="p-1 me-1 rounded-2 card-footer-star"
-                          ><i class="fa-regular fa-star"></i
+                        <span  onclick="makeFavorite(${index})" class="p-1 me-1 rounded-2 card-footer-star" style="color: rgb(255, 212, 59);"
+                          ><i id="favoriteStar" class="fa-regular fa-star" ></i
                         ></span>
-                        <span onclick="" class="p-1 me-1 rounded-2 card-footer-heart"
+                        <span onclick="makeEmergency(${index})" class="p-1 text-danger me-1 rounded-2 card-footer-heart"
                           ><i class="fa-regular fa-heart"></i
                         ></span>
                         <span onclick="setForUpdate(${index})" class="p-1 me-1 rounded-2 card-footer-pen"
@@ -370,30 +379,85 @@ function setForUpdate(updatedIndex) {
   addBtn.classList.add("d-none");
 }
 function updateContact() {
-  var modal = bootstrap.Modal.getInstance(
-    document.getElementById("contactModal"),
-  );
-  ContactList[GlobalIndex].fullName = fullNameInput.value;
-  ContactList[GlobalIndex].phoneNumber = phoneNumberInput.value;
-  ContactList[GlobalIndex].Email = emailInput.value;
-  ContactList[GlobalIndex].Address = AddressInput.value;
-  ContactList[GlobalIndex].Group = GroupInput.value;
-  ContactList[GlobalIndex].Notes = NotesInput.value;
-  ContactList[GlobalIndex].isFavorite = isFavoriteInput.checked;
-  ContactList[GlobalIndex].isEmergency = isEmergencyInput.checked;
-  if (imageInput.files[0]) {
-    ContactList[GlobalIndex].image = "images/" + imageInput.files[0]?.name;
+  if (
+    validateInput(fullNameInput) &&
+    validateInput(phoneNumberInput) &&
+    validateInput(emailInput) &&
+    validateInput(AddressInput) &&
+    validateInput(NotesInput) &&
+    validateInput(imageInput)
+  ) {
+    var modal = bootstrap.Modal.getInstance(
+      document.getElementById("contactModal"),
+    );
+    ContactList[GlobalIndex].fullName = fullNameInput.value;
+    ContactList[GlobalIndex].phoneNumber = phoneNumberInput.value;
+    ContactList[GlobalIndex].Email = emailInput.value;
+    ContactList[GlobalIndex].Address = AddressInput.value;
+    ContactList[GlobalIndex].Group = GroupInput.value;
+    ContactList[GlobalIndex].Notes = NotesInput.value;
+    ContactList[GlobalIndex].isFavorite = isFavoriteInput.checked;
+    ContactList[GlobalIndex].isEmergency = isEmergencyInput.checked;
+    if (imageInput.files[0]) {
+      ContactList[GlobalIndex].image = "images/" + imageInput.files[0]?.name;
+    }
+    localStorage.setItem("Contacts", JSON.stringify(ContactList));
+    displayContactCard(ContactList);
+    dispalyFavouriteCard(ContactList);
+    dispalyEmergencyCard(ContactList);
+    showStatistics();
+    modal.hide();
+    Swal.fire({
+      title: "Done",
+      text: "Contact Updated",
+      icon: "success",
+      confirmButtonText: "Close",
+    });
+  }
+}
+function makeFavorite(index) {
+  if (ContactList[index].isFavorite == true) {
+    ContactList[index].isFavorite = false;
+  } else if (ContactList[index].isFavorite == false) {
+    ContactList[index].isFavorite = true;
   }
   localStorage.setItem("Contacts", JSON.stringify(ContactList));
   displayContactCard(ContactList);
   dispalyFavouriteCard(ContactList);
   dispalyEmergencyCard(ContactList);
-  showStatistics();
-  modal.hide();
-  Swal.fire({
-    title: "Done",
-    text: "Contact Updated",
-    icon: "success",
-    confirmButtonText: "Close",
-  });
+}
+function makeEmergency(index) {
+  if (ContactList[index].isEmergency == true) {
+    ContactList[index].isEmergency = false;
+  } else if (ContactList[index].isEmergency == false) {
+    ContactList[index].isEmergency = true;
+  }
+  localStorage.setItem("Contacts", JSON.stringify(ContactList));
+  displayContactCard(ContactList);
+  dispalyFavouriteCard(ContactList);
+  dispalyEmergencyCard(ContactList);
+}
+function validateInput(element) {
+  var regex = {
+    fullName: /^\w{2,15}\s?\w{0,15}$/,
+    phoneNumber: /^01[0125][0-9]{8}$/,
+    email: /^\w{2,10}\.?\w{0,10}[0-9]{0,3}@(gmail|yahoo|hotmail)\.com$/,
+    Address: /^[A-Za-z0-9\s,.-]{5,50}$/,
+    Notes: /^.{0,200}$/,
+    contactImage: /^image\/(jpg|jpeg|png|gif|webp)$/,
+  };
+  var value = element.value;
+  if (element.id == "contactImage") {
+    value = imageInput.files[0]?.type;
+  }
+
+  if (regex[element.id].test(value)) {
+    element.classList.add("is-valid");
+    element.classList.remove("is-invalid");
+    return true;
+  } else {
+    element.classList.add("is-invalid");
+    element.classList.remove("is-valid");
+    return false;
+  }
 }

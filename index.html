@@ -67,13 +67,19 @@
 
           <div class="modal-body">
             <label for="contactImage">Choose Your Photo</label>
-            <input class="form-control" id="contactImage" type="file" />
+            <input
+              class="form-control"
+              required
+              id="contactImage"
+              type="file"
+            />
             <div class="mt-2">
               <label for="fullName"
                 >Full Name <span class="text-danger">*</span></label
               >
               <input
                 type="text"
+                oninput="validateInput(this)"
                 id="fullName"
                 class="form-control"
                 placeholder="Enter Full Name"
@@ -84,6 +90,7 @@
               >
               <input
                 type="number"
+                oninput="validateInput(this)"
                 id="phoneNumber"
                 class="form-control"
                 placeholder="e.g., 01155213444"
@@ -94,6 +101,7 @@
               >
               <input
                 type="email"
+                oninput="validateInput(this)"
                 id="email"
                 class="form-control"
                 placeholder="Name@Example.com"
@@ -105,6 +113,7 @@
               <input
                 type="text"
                 id="Address"
+                oninput="validateInput(this)"
                 class="form-control"
                 placeholder="Enter Address"
               />
@@ -125,6 +134,7 @@
               >
               <textarea
                 name="Notes"
+                oninput="validateInput(this)"
                 id="Notes"
                 class="form-control mb-2"
                 rows="3"
